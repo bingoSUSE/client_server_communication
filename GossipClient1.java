@@ -1,7 +1,7 @@
 /* This the client side code */
 import java.io.*;
 import java.net.*;
-public class GossipClient
+public class ChatClient
 {
   public static void main(String[] args) throws Exception
   {
@@ -11,7 +11,7 @@ public class GossipClient
      
                          // sending to client (pwrite object)
      OutputStream ostream = sock.getOutputStream(); 
-     PrintWriter pwrite = new PrintWriter(ostream);
+     PrintWriter pwrite = new PrintWriter(ostream, true);
 
                               // receiving from server ( receiveRead  object)
      InputStream istream = sock.getInputStream();
@@ -24,7 +24,7 @@ public class GossipClient
      {
         sendMessage = keyRead.readLine();  // keyboard reading
         pwrite.println(sendMessage);       // sending to server
-        
+        pwrite.flush();                    // flush the data
         if((receiveMessage = receiveRead.readLine()) != null) //receive from server
         {
             System.out.print("Server: ");
@@ -33,4 +33,3 @@ public class GossipClient
       }               
     }                    
 }                        
-
