@@ -1,7 +1,7 @@
 /* This the server side code */
 import java.io.*;
 import java.net.*;
-public class GossipServer
+public class ChatServer
 {
   public static void main(String[] args) throws Exception
   {
@@ -12,7 +12,7 @@ public class GossipServer
       BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
 	                    // sending to client (pwrite object)
       OutputStream ostream = sock.getOutputStream(); 
-      PrintWriter pwrite = new PrintWriter(ostream);
+      PrintWriter pwrite = new PrintWriter(ostream, true);
 
                               // receiving from server ( receiveRead  object)
       System.out.print("Client: ");
@@ -28,7 +28,7 @@ public class GossipServer
         }         
         sendMessage = keyRead.readLine(); 
         pwrite.println(sendMessage);             
-        
+        pwrite.flush();
       }               
     }                    
 } 
